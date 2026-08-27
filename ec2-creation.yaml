@@ -12,7 +12,10 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0 # For better security, restrict this to your IP
-        
+        - IpProtocol: tcp
+          FromPort: 24
+          ToPort: 24
+          CidrIp: 0.0.0.0/0 # For better security, restrict this to your IP
         
        
   # 2. Define the EC2 Instance
@@ -26,5 +29,5 @@ Resources:
         - !Ref WebServerSecurityGroup
       Tags:
         - Key: Name
-          Value: manual-ec2
+          Value: pipeline-ec2
   
