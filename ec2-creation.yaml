@@ -16,6 +16,10 @@ Resources:
           FromPort: 24
           ToPort: 24
           CidrIp: 0.0.0.0/0 # For better security, restrict this to your IP
+        - IpProtocol: tcp
+          FromPort: 25
+          ToPort: 25
+          CidrIp: 0.0.0.0/0 # For better security, restrict this to your IP
         
        
   # 2. Define the EC2 Instance
