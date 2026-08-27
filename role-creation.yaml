@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation template to create an IAM role for an EC2 instance.'
+
+Resources:
+  MyS3AccessRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'role-created-cloudformation'
+      Description: 'Allows EC2 instances to call AWS S3 services.'
+      
+      # The Trust Policy: Defines who can assume this role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'ec2.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      
+      # Managed Policies: Existing AWS policies you want to attach
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess'
+        - 'arn:aws:iam::aws:policy/AmazonEC2FullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+
+      # Inline Policies: Custom policies defined inside this role
+      Policies:
+        - PolicyName: 'S3WritePermissions'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: 'Allow'
+                Action:
+                  - 's3:PutObject'
+                  
+                Resource: 'arn:aws:s3:::my-target-bucket-name/*'
+
+                
+  
+
