@@ -16,7 +16,7 @@
   tasks:
     - name: Launch Amazon EC2 Instance
       amazon.aws.ec2_instance:
-        name: "Ubuntu-Ansible-Server"
+        name: "Ubuntu-pipeline-Server"
         key_name: "{{ key_name }}"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami_id }}"
